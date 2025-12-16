@@ -85,8 +85,7 @@ func (s *Scraper) processAllPages() {
 				return
 			}
 			log.Printf("Fetch page %d error: %v", page, err)
-			page++
-			continue
+			return
 		}
 		for _, app := range res {
 			b, err := json.Marshal(app)
