@@ -3,7 +3,7 @@ name: Run Steam Spy Scraper and Upload JSON
 on:
   workflow_dispatch:  # allows manual trigger
   schedule:
-    - cron: '0 2 * * 0'  # every Sunday at 02:00 UTC
+    - cron: '0 1 * * 0'  # every Sunday at 01:00 UTC
 
 jobs:
   scrape:
