@@ -1,5 +1,7 @@
 github.com/ShadowDash2000/steam-store-go v0.0.12 h1:eoKpg4SR5BosYAnroQNWyUjYcDpDfmtOcXQtOFX7rKI=
 github.com/ShadowDash2000/steam-store-go v0.0.12/go.mod h1:d+26r7qNAjoBGH5I+grVqMY1g/MelyPyrqaZAeuTZWo=
+github.com/ShadowDash2000/steam-store-go v0.0.13 h1:kEEMbDDXcq73zVAHeDeIsCHL8soYZ8OY3MoJlONzWRs=
+github.com/ShadowDash2000/steam-store-go v0.0.13/go.mod h1:d+26r7qNAjoBGH5I+grVqMY1g/MelyPyrqaZAeuTZWo=
 github.com/google/go-cmp v0.5.2 h1:X2ev0eStA3AbceY54o37/0PQ/UWqKEiiO2dKL5OPaFM=
 github.com/google/go-cmp v0.5.2/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-querystring v1.1.0 h1:AnCroh3fv4ZBgVIf1Iwtovgjaw/GiKJo8M8yD/fhyJ8=

@@ -10,6 +10,7 @@ import (
 	"time"
 
 	steamstore "github.com/ShadowDash2000/steam-store-go"
+	"resty.dev/v3"
 )
 
 type Scraper struct {
@@ -22,9 +23,25 @@ type Scraper struct {
 }
 
 func NewScraper(ctx context.Context, outName string, f *os.File) *Scraper {
+	c := steamstore.New()
+	c.Client().
+		SetRetryCount(10).
+		SetRetryWaitTime(1 * time.Second).
+		SetRetryMaxWaitTime(10 * time.Second).
+		DisableRetryDefaultConditions().
+		AddRetryConditions(func(res *resty.Response, err error) bool {
+			if res.StatusCode() == 500 {
+				return false
+			}
+			if res.StatusCode() < 200 || res.StatusCode() >= 400 {
+				return true
+			}
+			return false
+		})
+
 	return &Scraper{
 		ctx:     ctx,
-		client:  steamstore.New(),
+		client:  c,
 		f:       f,
 		outName: outName,
 	}
