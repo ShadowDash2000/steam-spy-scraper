@@ -10,12 +10,13 @@ import (
 	"time"
 
 	steamstore "github.com/ShadowDash2000/steam-store-go"
+	"github.com/ShadowDash2000/steam-store-go/apis/steam-spy"
 	"resty.dev/v3"
 )
 
 type Scraper struct {
 	ctx        context.Context
-	client     *steamstore.Client
+	client     *steam_spy.SteamSpy
 	f          *os.File
 	outName    string
 	wroteFirst bool
@@ -28,7 +29,7 @@ func NewScraper(ctx context.Context, outName string, f *os.File) *Scraper {
 		SetRetryCount(10).
 		SetRetryWaitTime(1 * time.Second).
 		SetRetryMaxWaitTime(10 * time.Second).
-		DisableRetryDefaultConditions().
+		SetRetryDefaultConditions(false).
 		AddRetryConditions(func(res *resty.Response, err error) bool {
 			if res.StatusCode() == 500 {
 				return false
@@ -41,7 +42,7 @@ func NewScraper(ctx context.Context, outName string, f *os.File) *Scraper {
 
 	return &Scraper{
 		ctx:     ctx,
-		client:  c,
+		client:  c.NewSteamSpy(),
 		f:       f,
 		outName: outName,
 	}
@@ -95,9 +96,9 @@ func (s *Scraper) writeItemBytes(b []byte) {
 func (s *Scraper) processAllPages() {
 	page := uint(1)
 	for {
-		res, err := s.client.GetSteamSpyAppsPaginated(s.ctx, page)
+		res, err := s.client.GetAppsDetailsPaginated(s.ctx, page)
 		if err != nil {
-			if errors.Is(err, steamstore.ErrSteamSpyLastPage) {
+			if errors.Is(err, steam_spy.ErrSteamSpyLastPage) {
 				log.Printf("Reached last page at %d", page)
 				return
 			}
