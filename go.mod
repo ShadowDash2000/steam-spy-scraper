@@ -3,7 +3,7 @@ module steam-spy-scraper
 go 1.27.0
 
 require (
-	github.com/ShadowDash2000/steam-store-go v1.0.1
+	github.com/ShadowDash2000/steam-store-go v1.0.2
 	resty.dev/v3 v3.0.0-rc.3
 )
 
